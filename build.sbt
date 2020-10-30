@@ -1,6 +1,6 @@
 import com.typesafe.sbt.packager.docker.Cmd
 
-name := "codacy-detekt-metrics"
+name := "codacy-metrics-detekt"
 
 scalaVersion := "2.13.3"
 
@@ -35,27 +35,3 @@ libraryDependencies ++= {
 }
 
 enablePlugins(JavaAppPackaging)
-enablePlugins(DockerPlugin)
-
-val dockerUser = "docker"
-val dockerGroup = "docker"
-
-daemonUser in Docker := dockerUser
-
-daemonGroup in Docker := dockerGroup
-
-dockerBaseImage := "openjdk:8-jre-alpine"
-
-dockerEntrypoint := Seq(s"/opt/docker/bin/${name.value}")
-
-dockerCommands := dockerCommands.value.flatMap {
-  case cmd @ Cmd("WORKDIR", _) => Seq(Cmd("WORKDIR", "/src"))
-  case cmd @ Cmd("ADD", _) =>
-    Seq(
-      Cmd("RUN", s"adduser -u 2004 -D $dockerUser"),
-      cmd,
-      Cmd("RUN", "mv /opt/docker/docs /docs"),
-      Cmd("RUN", "apk --no-cache add bash")
-    )
-  case other => List(other)
-}

@@ -17,8 +17,8 @@ workflows:
                  scalafmt::test;
                  sbt:scalafmt::test;
                  set name := \"$CIRCLE_PROJECT_REPONAME\";
-                 set version in Docker := \"latest\";
-                 docker:publishLocal"
+                 universal:stage"
+            docker build -t $CIRCLE_PROJECT_REPONAME:latest .
             docker save --output ~/workdir/docker-image.tar $CIRCLE_PROJECT_REPONAME:latest
           persist_to_workspace: true
           requires:
