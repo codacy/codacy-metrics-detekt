@@ -1,6 +1,46 @@
 # codacy-metrics-detekt
 
-Template repository for new public repositories. 
+This is the docker engine we use at Codacy to have [Detekt](https://github.com/arturbosch/detekt) metrics support.
+
+## Build
+
+### Requirements
+
+* [Docker](https://www.docker.com/)
+* [sbt](https://www.scala-sbt.org/)
+* Java 8+
+
+### Steps
+
+```bash
+sbt docker:publishLocal
+```
+
+## Run
+
+### Requirements
+
+* [Docker](https://www.docker.com/)
+
+### Steps
+
+```bash
+docker run -it -v <SRC_DIR>:/src <DOCKER_NAME>:<DOCKER_VERSION>
+```
+
+* `<SRC_DIR>` should be the directory where your project is.
+* `<DOCKER_NAME>` should be the docker image name you created in the Build step
+* `<DOCKER_VERSION>` should be the docker image version from the Build step
+
+Example:
+
+```bash
+docker run -it -v $PWD:/src codacy-metrics-detekt:0.1.0
+```
+
+## Test
+
+We use the [codacy-plugins-test](https://github.com/codacy/codacy-plugins-test) to test our external tools integration. You can follow the instructions there to make sure your tool is working as expected.
 
 ## What is Codacy
 
