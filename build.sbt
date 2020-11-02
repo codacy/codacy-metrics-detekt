@@ -1,5 +1,3 @@
-import com.typesafe.sbt.packager.docker.Cmd
-
 name := "codacy-metrics-detekt"
 
 scalaVersion := "2.13.3"
@@ -8,7 +6,7 @@ val detektVersion = "1.14.2"
 
 resolvers += Resolver.jcenterRepo
 
-scalacOptions in (Compile, console) ~= {
+Compile / console / scalacOptions ~= {
   _.filterNot(Set("-Ywarn-unused-import", "-Ywarn-unused:imports"))
 }
 
