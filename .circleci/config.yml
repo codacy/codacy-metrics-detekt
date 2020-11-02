@@ -19,7 +19,7 @@ workflows:
                  set name := \"$CIRCLE_PROJECT_REPONAME\";
                  universal:stage"
             docker build -t $CIRCLE_PROJECT_REPONAME:latest .
-            docker save --output ~/workdir/docker-image.tar $CIRCLE_PROJECT_REPONAME:latest
+            docker save --output docker-image.tar $CIRCLE_PROJECT_REPONAME:latest
           persist_to_workspace: true
           requires:
             - codacy/checkout_and_version
