@@ -1,5 +1,7 @@
 # codacy-metrics-detekt
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/3938aadcc7b24756aee3197ecadcb153)](https://app.codacy.com/gh/codacy/codacy-metrics-detekt?utm_source=github.com&utm_medium=referral&utm_content=codacy/codacy-metrics-detekt&utm_campaign=Badge_Grade_Settings)
+
 This is the docker engine we use at Codacy to have [Detekt](https://github.com/arturbosch/detekt) metrics support.
 
 ## Build
