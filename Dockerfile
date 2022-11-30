@@ -1,4 +1,4 @@
-FROM alpine:3.14
+FROM alpine:3.17.0
 
 # bash is needed to run stage script
 RUN apk add --no-cache openjdk11 bash
