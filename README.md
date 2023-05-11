@@ -13,7 +13,7 @@ This is the docker engine we use at Codacy to have [Detekt](https://github.com/a
 ### Steps
 
 ```bash
-sbt universal:stage
+sbt Universal / stage
 docker build -t codacy-metrics-detekt .
 ```
 
