@@ -2,7 +2,7 @@ name := "codacy-metrics-detekt"
 
 scalaVersion := "2.13.3"
 
-val detektVersion = "1.22.0"
+val detektVersion = "1.23.1"
 
 resolvers += Resolver.jcenterRepo
 
