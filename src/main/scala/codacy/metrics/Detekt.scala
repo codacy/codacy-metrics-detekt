@@ -42,8 +42,8 @@ object Detekt extends MetricsTool {
 
   private def validateLanguage(maybeLanguage: Option[Language]) =
     maybeLanguage match {
-      case Some(language) if language != Languages.Kotlin =>
-        Failure(new Exception(s"Unsupported language detected: $language"))
+      case Some(lang) if lang != Languages.Kotlin =>
+        Failure(new Exception(s"Unsupported language detected: $lang"))
       case l => Success(l)
     }
 
