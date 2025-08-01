@@ -20,17 +20,20 @@ import scala.util.{Failure, Success, Try}
 
 object Detekt extends MetricsTool {
   private val processors =
-    List[FileProcessListener](new ProjectLOCProcessor,
-                              new ProjectCLOCProcessor,
-                              new ProjectComplexityProcessor,
-                              new ClassCountProcessor,
-                              new FunctionCountProcessor)
+    List[FileProcessListener](
+      new ProjectLOCProcessor,
+      new ProjectCLOCProcessor,
+      new ProjectComplexityProcessor,
+      new ClassCountProcessor,
+      new FunctionCountProcessor
+    )
 
   override def apply(
       source: Source.Directory,
       language: Option[Language],
       files: Option[Set[Source.File]],
-      options: Map[Options.Key, Options.Value]): Try[List[FileMetrics]] = {
+      options: Map[Options.Key, Options.Value]
+  ): Try[List[FileMetrics]] = {
     for {
       _ <- validateLanguage(language)
       metrics <- computeFileMetrics(source.path, files)
@@ -39,13 +42,15 @@ object Detekt extends MetricsTool {
 
   private def validateLanguage(maybeLanguage: Option[Language]) =
     maybeLanguage match {
-      case Some(language) if language != Languages.Kotlin =>
-        Failure(new Exception(s"Unsupported language detected: $language"))
+      case Some(lang) if lang != Languages.Kotlin =>
+        Failure(new Exception(s"Unsupported language detected: $lang"))
       case l => Success(l)
     }
 
-  private def computeFileMetrics(directory: String,
-                                 filesOpt: Option[Set[Source.File]]) = {
+  private def computeFileMetrics(
+      directory: String,
+      filesOpt: Option[Set[Source.File]]
+  ) = {
     Try {
       val config = new YamlConfig(new java.util.HashMap(), "")
 
@@ -74,8 +79,10 @@ object Detekt extends MetricsTool {
     }
   }
 
-  private def filterKtFiles(ktFiles: mutable.Buffer[KtFile],
-                            filesOpt: Option[Set[Source.File]]) = {
+  private def filterKtFiles(
+      ktFiles: mutable.Buffer[KtFile],
+      filesOpt: Option[Set[Source.File]]
+  ) = {
     filesOpt match {
       case None => ktFiles
       case Some(files) =>
@@ -89,19 +96,23 @@ object Detekt extends MetricsTool {
       complexity = Option(
         file
           .getUserData(ProjectComplexityProcessorKt.getComplexityKey)
-          .intValue()),
+          .intValue()
+      ),
       loc =
         Option(file.getUserData(ProjectLOCProcessorKt.getLinesKey).intValue()),
       cloc = Option(
-        file.getUserData(ProjectCLOCProcessorKt.getCommentLinesKey).intValue()),
+        file.getUserData(ProjectCLOCProcessorKt.getCommentLinesKey).intValue()
+      ),
       nrMethods = Option(
         file
           .getUserData(FunctionCountProcessorKt.getNumberOfFunctionsKey)
-          .intValue()),
+          .intValue()
+      ),
       nrClasses = Option(
         file
           .getUserData(ClassCountProcessorKt.getNumberOfClassesKey)
-          .intValue()),
+          .intValue()
+      ),
       lineComplexities = Set.empty
     )
   }

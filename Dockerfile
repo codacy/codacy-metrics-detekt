@@ -1,7 +1,7 @@
-FROM alpine:3.18.3
+FROM alpine:3.22
 
 # bash is needed to run stage script
-RUN apk add --no-cache openjdk11 bash
+RUN apk add --no-cache openjdk17 bash
 COPY docs /docs
 RUN adduser --uid 2004 --disabled-password --gecos "" docker
 COPY target/universal/stage/ /workdir/

@@ -1,8 +1,8 @@
 name := "codacy-metrics-detekt"
 
-scalaVersion := "2.13.3"
+scalaVersion := "2.13.16"
 
-val detektVersion = "1.23.1"
+val detektVersion = "1.23.8"
 
 resolvers += Resolver.jcenterRepo
 
@@ -12,7 +12,7 @@ Compile / console / scalacOptions ~= {
 
 libraryDependencies ++= {
   Seq(
-    "com.codacy" %% "codacy-metrics-scala-seed" % "0.2.2",
+    "com.codacy" %% "codacy-metrics-scala-seed" % "0.3.3",
     "io.gitlab.arturbosch.detekt" % "detekt-core" % detektVersion,
     "io.gitlab.arturbosch.detekt" % "detekt-api" % detektVersion,
     "io.gitlab.arturbosch.detekt" % "detekt-rules" % detektVersion,
