@@ -16,7 +16,7 @@ workflows:
             sbt "clean;
                  scalafmtCheckAll;
                  Test / scalafmtCheck;
-                 scalafmtCheck;"
+                 scalafmtCheck;
                  set name := \"$CIRCLE_PROJECT_REPONAME\";
                  universal:stage"
             docker build -t $CIRCLE_PROJECT_REPONAME:latest .
